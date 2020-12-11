@@ -6,6 +6,7 @@
     @endforeach
 @endif -->
 <form method="post" action="users">
+    {{method_field('PUT')}}
     @csrf
     <input type="text" name="username" value="" />
     <br>
