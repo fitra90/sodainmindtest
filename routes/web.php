@@ -26,7 +26,7 @@ Route::get('/auth/activate-this/{email}', [UsersController::class, 'activateUser
 
 //LOGOUT
 Route::get('auth/logout', function(){
-    session_destroy();
+    session()->flush();
     return redirect('/');
 });
 

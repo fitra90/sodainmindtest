@@ -10,32 +10,38 @@ use Illuminate\Support\Facades\Mail;
 class UsersController extends Controller
 {
     public function getLogin(Request $post){
-        //check password & username
         $is_correct = User::where([['username', '=', $post->username],['password', '=', sha1($post->pass)]])->first();
-        // var_dump($is_correct);die();
-        if($is_correct) {
-            session('user', $post->username);
+        
+        if($is_correct && $is_correct->is_active > 0 && $is_correct->role == 2) {
+            session(['user' => $is_correct->email], ['role' => 1]);
             return redirect()->action([HomeController::class, 'index']);
 
-        } else {
-            return view('pages.auth.login', array('is_login_correct'=> false));
+        } else if($is_correct && $is_correct->is_active > 0 && $is_correct->role ==1){
+            session(['user' => $is_correct->email], ['role' => 2]);
+            // return redirect()->action([UserController::class, 'index']);
+            return redirect('/admin');
 
+        } else if($is_correct && $is_correct->is_active == 0){
+            return view('pages.auth.confirm');
+        } 
+        else{
+            return view('pages.auth.login', array('is_login_correct'=> false));
         }
-        
-        
-        // var_dump($post->input()); die();
     }
 
     public function showRegisterForm() {
-        return view('pages.auth.register', array('is_email_taken'=> false));
+        if(session()->has('user')) {
+            return redirect('/');
+         } else {
+            return view('pages.auth.register', array('is_email_taken'=> false));
+         }
     }
 
     public function showLoginForm() {
-        if(session()->has('email')) {
-            redirect('/');
+        if(session()->has('user')) {
+           return redirect('/');
         } else {
             return view('pages.auth.login', array('is_login_correct'=> true));
-            
         }
     }
 
