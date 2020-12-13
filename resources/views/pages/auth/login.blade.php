@@ -9,6 +9,13 @@
         <br>
     </span>
 
+    <div class="col-md-12 col-sm-12">
+        @if(!$is_login_correct)
+        <div class="alert alert-danger" role="alert">
+            <b>Oops!</b> &nbsp; Username / Password didn't match!
+        </div>
+        @endif
+    </div> 
     <div class="p-t-31 p-b-9">
         <span class="txt1">
             Username

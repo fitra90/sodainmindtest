@@ -17,16 +17,17 @@ use App\Http\Controllers\AdminController;
 */
 
 // LOGIN & REGISTER
-Route::view('/auth/login', 'pages/auth/login');
 Route::post('/auth/login', [UsersController::class, 'getLogin']);
+Route::get('/auth/login', [UsersController::class, 'showLoginForm']);
 Route::get('/auth/register', [UsersController::class, 'showRegisterForm']);
 Route::post('/auth/post-register', [UsersController::class, 'postRegister']);
-// Route::get('/auth/confirm', 'pages/auth/confirm');
 Route::get('/auth/email-activation/{userId}', [UsersController::class, 'sendActivationEmail']);
+Route::get('/auth/activate-this/{email}', [UsersController::class, 'activateUser']);
 
 //LOGOUT
-Route::get('logout', function(){
-    return redirect('/auth/login');
+Route::get('auth/logout', function(){
+    session_destroy();
+    return redirect('/');
 });
 
 //PUBLIC PAGES

@@ -10,20 +10,33 @@ use Illuminate\Support\Facades\Mail;
 class UsersController extends Controller
 {
     public function getLogin(Request $post){
-        // echo "loginhere";
-        // $post->validate([
-        //     'username' => 'required | max:10',
-        //     'password' => 'required | min: 5'
-        // ]);
-        // $data = $post->input();
-        // $post->session()->put('user', $data['username']);
+        //check password & username
+        $is_correct = User::where([['username', '=', $post->username],['password', '=', sha1($post->pass)]])->first();
+        // var_dump($is_correct);die();
+        if($is_correct) {
+            session('user', $post->username);
+            return redirect()->action([HomeController::class, 'index']);
+
+        } else {
+            return view('pages.auth.login', array('is_login_correct'=> false));
+
+        }
         
-        // return $post->input();
-        var_dump($post->input()); die();
+        
+        // var_dump($post->input()); die();
     }
 
     public function showRegisterForm() {
         return view('pages.auth.register', array('is_email_taken'=> false));
+    }
+
+    public function showLoginForm() {
+        if(session()->has('email')) {
+            redirect('/');
+        } else {
+            return view('pages.auth.login', array('is_login_correct'=> true));
+            
+        }
     }
 
     public function postRegister(Request $post){
@@ -65,11 +78,11 @@ class UsersController extends Controller
     public function activateUser($email){
         $data = User::where('email', $email)->first();
         $data->is_active = 1;
-        $data->save();
+        $saved = $data->save();
         if($saved) {
-            return view('pages.auth.activation-success');
+            return view('pages.auth.activationsuccess');
         }else {
-            return "failed to activate user!;
+            return "failed to activate user!";
         }
     }
 }

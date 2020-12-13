@@ -15,7 +15,7 @@
             <b>Email already taken!</b> &nbsp; Please input another Email.
         </div>
         @endif
-    </div>
+    </div>  
     <div class="p-t-31 p-b-9">
         <span class="txt1">
             Username
