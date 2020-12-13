@@ -1,22 +1,21 @@
 @extends('pages.auth.layout')
 @section('title', 'Register Page')
 @section('content')
-<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/auth/register">
+<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/auth/post-register">
     @csrf
     <span class="login100-form-title p-b-53">
-        Register With
+        <img src="/assets/img/brand/blue.png" width="300px" />
+        <br>
+
     </span>
 
-    <a href="#" class="btn-face m-b-20">
-        <i class="fa fa-facebook-official"></i>
-        Facebook
-    </a>
-
-    <a href="#" class="btn-google m-b-20">
-        <img src="../images/icons/icon-google.png" alt="GOOGLE">
-        Google
-    </a>
-
+    <div class="col-md-12 col-sm-12">
+        @if($is_email_taken)
+        <div class="alert alert-danger" role="alert">
+            <b>Email already taken!</b> &nbsp; Please input another Email.
+        </div>
+        @endif
+    </div>
     <div class="p-t-31 p-b-9">
         <span class="txt1">
             Username

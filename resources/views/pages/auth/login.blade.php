@@ -3,19 +3,11 @@
 @section('content')
 <form class="login100-form validate-form flex-sb flex-w" method="POST" action="/auth/login">
     @csrf
+
     <span class="login100-form-title p-b-53">
-        Sign In With
+        <img src="/assets/img/brand/blue.png" width="300px" />
+        <br>
     </span>
-
-    <a href="#" class="btn-face m-b-20">
-        <i class="fa fa-facebook-official"></i>
-        Facebook
-    </a>
-
-    <a href="#" class="btn-google m-b-20">
-        <img src="../images/icons/icon-google.png" alt="GOOGLE">
-        Google
-    </a>
 
     <div class="p-t-31 p-b-9">
         <span class="txt1">

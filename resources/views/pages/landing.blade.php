@@ -21,7 +21,7 @@ Coded by www.creative-tim.com
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Argon Design System by Creative Tim
+    Best Network Marketing
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -64,91 +64,19 @@ Coded by www.creative-tim.com
         </div>
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
-              <i class="ni ni-ui-04 d-lg-none"></i>
-              <span class="nav-link-inner--text">Components</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-xl">
-              <div class="dropdown-menu-inner">
-                <a href="https://demos.creative-tim.com/argon-design-system/docs/getting-started/overview.html" class="media d-flex align-items-center">
-                  <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                    <i class="ni ni-spaceship"></i>
-                  </div>
-                  <div class="media-body ml-3">
-                    <h6 class="heading text-primary mb-md-1">Getting started</h6>
-                    <p class="description d-none d-md-inline-block mb-0">Learn how to use compiling Scss, change brand colors and more.</p>
-                  </div>
-                </a>
-                <a href="https://demos.creative-tim.com/argon-design-system/docs/foundation/colors.html" class="media d-flex align-items-center">
-                  <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
-                    <i class="ni ni-palette"></i>
-                  </div>
-                  <div class="media-body ml-3">
-                    <h6 class="heading text-primary mb-md-1">Foundation</h6>
-                    <p class="description d-none d-md-inline-block mb-0">Learn more about colors, typography, icons and the grid system we used for .</p>
-                  </div>
-                </a>
-                <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html" class="media d-flex align-items-center">
-                  <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                    <i class="ni ni-ui-04"></i>
-                  </div>
-                  <div class="media-body ml-3">
-                    <h5 class="heading text-warning mb-md-1">Components</h5>
-                    <p class="description d-none d-md-inline-block mb-0">Browse our 50 beautiful handcrafted components offered in the Free version.</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
+            <a href="#pricing" class="nav-link" data-toggle="dropdown"role="button">
               <i class="ni ni-collection d-lg-none"></i>
-              <span class="nav-link-inner--text">Examples</span>
+              <span class="nav-link-inner--text">Home</span>
             </a>
-            <div class="dropdown-menu">
-              <a href="../examples/landing.html" class="dropdown-item">Landing</a>
-              <a href="../examples/profile.html" class="dropdown-item">Profile</a>
-              <a href="../examples/login.html" class="dropdown-item">Login</a>
-              <a href="../examples/register.html" class="dropdown-item">Register</a>
-            </div>
           </li>
         </ul>
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://www.facebook.com/CreativeTim/" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
-              <i class="fa fa-facebook-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Facebook</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial" target="_blank" data-toggle="tooltip" title="Follow us on Instagram">
-              <i class="fa fa-instagram"></i>
-              <span class="nav-link-inner--text d-lg-none">Instagram</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://twitter.com/creativetim" target="_blank" data-toggle="tooltip" title="Follow us on Twitter">
-              <i class="fa fa-twitter-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Twitter</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://github.com/creativetimofficial/argon-design-system" target="_blank" data-toggle="tooltip" title="Star us on Github">
-              <i class="fa fa-github"></i>
-              <span class="nav-link-inner--text d-lg-none">Github</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-neutral" href="https://www.creative-tim.com/builder/argon" target="_blank">
-              <span class="nav-link-inner--text">Online Builder</span>
-            </a>
-          </li>
           <li class="nav-item d-none d-lg-block">
-            <a href="https://www.creative-tim.com/product/argon-design-system-pro?ref=ads-upgrade-pro" target="_blank" class="btn btn-neutral btn-icon">
+            <a href="/auth/register" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
-                <i class="fa fa-shopping-cart"></i>
+                <i class="ni ni-circle-08"></i>
               </span>
-              <span class="nav-link-inner--text">Upgrade to PRO</span>
+              <span class="nav-link-inner--text">Register NOW</span>
             </a>
           </li>
         </ul>
@@ -175,12 +103,12 @@ Coded by www.creative-tim.com
           <div class="col px-0">
             <div class="row align-items-center justify-content-center">
               <div class="col-lg-6 text-center">
-                <h1 class="text-white display-1">People stories</h1>
+                <h1 class="text-white display-1">Best Network Marketing Team</h1>
                 <h2 class="display-4 font-weight-normal text-white">The time is right now!</h2>
                 <div class="btn-wrapper mt-4">
-                  <a href="https://www.creative-tim.com/product/argon-design-system" class="btn btn-warning btn-icon mt-3 mb-sm-0">
+                  <a href="#" class="btn btn-warning btn-icon mt-3 mb-sm-0 join-now">
                     <span class="btn-inner--icon"><i class="ni ni-button-play"></i></span>
-                    <span class="btn-inner--text">Play more</span>
+                    <span class="btn-inner--text">Join now</span>
                   </a>
                 </div>
               </div>
@@ -226,36 +154,24 @@ Coded by www.creative-tim.com
         </div>
       </div>
     </div>
-    <div class="section features-1">
+    <div id="pricing" class="section features-1">
       <div class="container">
         <div class="row">
           <div class="col-md-8 mx-auto text-center">
-            <span class="badge badge-primary badge-pill mb-3">Insight</span>
-            <h3 class="display-3">Full-Funnel Social Analytics</h3>
+            <span class="badge badge-primary badge-pill mb-3">Our services</span>
+            <h3 class="display-3">Getting RICH FAST with our services!</h3>
             <p class="lead">The time is now for it to be okay to be great. For being a bright color. For standing out.</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
             <div class="info">
-              <div class="icon icon-lg icon-shape icon-shape-primary shadow rounded-circle">
+              <div class="icon icon-lg icon-shape icon-shape-secondary shadow rounded-circle">
                 <i class="ni ni-settings-gear-65"></i>
               </div>
-              <h6 class="info-title text-uppercase text-primary">Social Conversations</h6>
+              <h6 class="info-title text-uppercase text-primary">Silver Tier</h6>
               <p class="description opacity-8">We get insulted by others, lose trust for those others. We get back stabbed by friends. It becomes harder for us to give others a hand.</p>
-              <a href="javascript:;" class="text-primary">More about us
-                <i class="ni ni-bold-right text-primary"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="info">
-              <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle">
-                <i class="ni ni-atom"></i>
-              </div>
-              <h6 class="info-title text-uppercase text-success">Analyze Performance</h6>
-              <p class="description opacity-8">Don't get your heart broken by people we love, even that we give them all we have. Then we lose family over time. As we live, our hearts turn colder.</p>
-              <a href="javascript:;" class="text-primary">Learn about our products
+              <a href="/plan/1" class="text-primary">More about Silver Tier
                 <i class="ni ni-bold-right text-primary"></i>
               </a>
             </div>
@@ -263,12 +179,24 @@ Coded by www.creative-tim.com
           <div class="col-md-4">
             <div class="info">
               <div class="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle">
+                <i class="ni ni-atom"></i>
+              </div>
+              <h6 class="info-title text-uppercase text-warning">Gold Tier</h6>
+              <p class="description opacity-8">Don't get your heart broken by people we love, even that we give them all we have. Then we lose family over time. As we live, our hearts turn colder.</p>
+              <a href="/plan/1" class="text-warning">More about Gold Tier
+                <i class="ni ni-bold-right text-warning"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="info">
+              <div class="icon icon-lg icon-shape icon-shape-info shadow rounded-circle">
                 <i class="ni ni-world"></i>
               </div>
-              <h6 class="info-title text-uppercase text-warning">Measure Conversions</h6>
+              <h6 class="info-title text-uppercase text-info">Platinum Tier</h6>
               <p class="description opacity-8">What else could rust the heart more over time? Blackgold. The time is now for it to be okay to be great. or being a bright color. For standing out.</p>
-              <a href="javascript:;" class="text-primary">Check our documentation
-                <i class="ni ni-bold-right text-primary"></i>
+              <a href="/plan/2" class="text-info">More about Platinum Tier
+                <i class="ni ni-bold-right text-info"></i>
               </a>
             </div>
           </div>
@@ -330,24 +258,21 @@ Coded by www.creative-tim.com
   <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
   <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="../assets/js/plugins/bootstrap-switch.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-  <script src="../assets/js/plugins/moment.min.js"></script>
-  <script src="../assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
-  <script src="../assets/js/plugins/bootstrap-datepicker.min.js"></script>
-  <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <script src="../assets/js/argon-design-system.min.js?v=1.2.2" type="text/javascript"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
     window.TrackJS &&
       TrackJS.install({
         token: "ee6fab19c5a04ac1a32a645abde4613a",
         application: "argon-design-system-pro"
       });
+
+      $('.join-now').on("click", ()=>{
+        window.scroll({
+            top: 1200,
+            left: 100,
+            behavior: 'smooth'
+          });
+    })
   </script>
 </body>
 

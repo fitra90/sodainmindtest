@@ -19,8 +19,10 @@ use App\Http\Controllers\AdminController;
 // LOGIN & REGISTER
 Route::view('/auth/login', 'pages/auth/login');
 Route::post('/auth/login', [UsersController::class, 'getLogin']);
-Route::view('/auth/register', 'pages/auth/register');
-Route::post('/auth/register', [UsersController::class, 'getRegister']);
+Route::get('/auth/register', [UsersController::class, 'showRegisterForm']);
+Route::post('/auth/post-register', [UsersController::class, 'postRegister']);
+// Route::get('/auth/confirm', 'pages/auth/confirm');
+Route::get('/auth/email-activation/{userId}', [UsersController::class, 'sendActivationEmail']);
 
 //LOGOUT
 Route::get('logout', function(){
@@ -30,8 +32,11 @@ Route::get('logout', function(){
 //PUBLIC PAGES
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/users',[UsersController::class, 'getUsers']);
-Route::get('/subscription',[SubscriptionsController::class, 'index']);
+Route::get('/plan/{id}',[SubscriptionsController::class, 'plan']);
 Route::get('/subscription',[SubscriptionsController::class, 'index']);
 
 //ADMIN PAGES
 Route::get('/admin', [AdminController::class, 'index']);
+
+
+//TOOLS
