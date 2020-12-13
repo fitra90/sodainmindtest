@@ -55,16 +55,21 @@ class UsersController extends Controller
         return User::all();
     }
 
-    public function checkEmail($email) {
-        $check = User::where('email', '=', $email)->firstOrFail();
-        return $check;
-
-    }
-
     public function sendActivationEmail($target) {
         $data = [
             'email' => $target,
         ];
         Mail::to($target)->send(new ArgonEmail($data));
+    }
+
+    public function activateUser($email){
+        $data = User::where('email', $email)->first();
+        $data->is_active = 1;
+        $data->save();
+        if($saved) {
+            return view('pages.auth.activation-success');
+        }else {
+            return "failed to activate user!;
+        }
     }
 }
