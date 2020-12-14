@@ -165,7 +165,20 @@ Coded by www.creative-tim.com
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
-                                    <a href="#" class="btn btn-sm btn-info mr-4">Subscribe Now</a>
+                                    <form action="/pay" method="POST">
+                                        <script
+                                            src="https://checkout.stripe.com/checkout.js" 
+                                            class="stripe-button" 
+                                            data-key="pk_test_C1Dps41NlB8MZT1fetvxQ3VU00MkEEzzJG"
+                                            data-amount="10000" 
+                                            data-name="test name" 
+                                            data-description="exampel" 
+                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png" 
+                                            data-local="auto" 
+                                            data-currency="usd">
+                                        </script>    
+                                    </form>
+                                    <a href="#" class="btn btn-sm btn-info mr-4">Buy Now</a>
                                     <a href="#" class="btn btn-sm btn-default float-right">FREE TRIAL</a>
                                 </div>
                             </div>
@@ -173,15 +186,11 @@ Coded by www.creative-tim.com
                                 <div class="card-profile-stats d-flex justify-content-center">
                                     <div>
                                         <span class="heading">22</span>
-                                        <span class="description">Trial</span>
+                                        <span class="description">Member</span>
                                     </div>
                                     <div>
                                         <span class="heading">10</span>
-                                        <span class="description">Subscribed</span>
-                                    </div>
-                                    <div>
-                                        <span class="heading">5</span>
-                                        <span class="description">Reviews</span>
+                                        <span class="description">Trial</span>
                                     </div>
                                 </div>
                             </div>

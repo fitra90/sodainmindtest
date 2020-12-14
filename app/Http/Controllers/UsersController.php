@@ -13,13 +13,13 @@ class UsersController extends Controller
         $is_correct = User::where([['username', '=', $post->username],['password', '=', sha1($post->pass)]])->first();
         
         if($is_correct && $is_correct->is_active > 0 && $is_correct->role == 2) {
-            session(['user' => $is_correct->email], ['role' => 1]);
+            session(['user' => $is_correct->email, 'role' => 1]);
             return redirect()->action([HomeController::class, 'index']);
 
         } else if($is_correct && $is_correct->is_active > 0 && $is_correct->role ==1){
-            session(['user' => $is_correct->email], ['role' => 2]);
+            session(['user' => $is_correct->email, 'role' => 1]);
             // return redirect()->action([UserController::class, 'index']);
-            return redirect('/admin');
+            return redirect()->action([AdminController::class, 'index']);
 
         } else if($is_correct && $is_correct->is_active == 0){
             return view('pages.auth.confirm');
