@@ -18,7 +18,6 @@ class UsersController extends Controller
 
         } else if($is_correct && $is_correct->is_active > 0 && $is_correct->role ==1){
             session(['user' => $is_correct->email, 'role' => 1]);
-            // return redirect()->action([UserController::class, 'index']);
             return redirect()->action([AdminController::class, 'index']);
 
         } else if($is_correct && $is_correct->is_active == 0){
@@ -59,8 +58,7 @@ class UsersController extends Controller
             $user->role = 2;
             $user->is_login = 0;
             $user->is_active = 0;
-            $is_saved = $user->save();
-            if($is_saved) {
+            if($user->save()) {
                 $this->sendActivationEmail($post->email);
                 return view('pages.auth.confirm');
             } else {
