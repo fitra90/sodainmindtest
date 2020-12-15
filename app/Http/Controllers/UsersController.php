@@ -62,13 +62,13 @@ class UsersController extends Controller
             $user->is_active = 0;
             if($user->save()) {
                 $this->sendActivationEmail($post->email);
-                return redirect('/confirm');
 
             } else {
                 echo "Registraion failed. <a href='/'> back to home </a>";
             }
         }
 
+        return redirect('/confirm');
         
     }
 
