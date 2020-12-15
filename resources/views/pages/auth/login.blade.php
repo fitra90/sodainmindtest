@@ -5,7 +5,7 @@
     @csrf
 
     <span class="login100-form-title p-b-53">
-        <img src="/assets/img/brand/blue.png" width="300px" />
+        <img src="/assets/img/brand/blue.png" width="250px" />
         <br>
     </span>
 

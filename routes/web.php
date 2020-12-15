@@ -14,6 +14,7 @@ Route::get('/auth/register', [UsersController::class, 'showRegisterForm']);
 Route::post('/auth/post-register', [UsersController::class, 'postRegister']);
 Route::get('/auth/email-activation/{userId}', [UsersController::class, 'sendActivationEmail']);
 Route::get('/auth/activate-this/{email}', [UsersController::class, 'activateUser']);
+Route::view('/confirm','pages.auth.confirm');
 
 //LOGOUT
 Route::get('auth/logout', function(){
@@ -31,8 +32,11 @@ Route::get('/subscription',[SubscriptionsController::class, 'index']);
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin-settings');
 Route::post('/admin/new-plan', [AdminController::class, 'newPlan']);
+Route::post('/admin/set-trial', [AdminController::class, 'setTrialDay']);
+Route::get('/admin/get-trial', [AdminController::class, 'getTrialDay']);
 Route::get('/admin/get-plan/{id}', [PlansController::class, 'getPlanData']);
 Route::delete('/admin/delete-plan/{id}', [PlansController::class, 'deletePlanData']);
+
 
 
 //ACTIONS

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Subscription;
 use App\Mail\ArgonEmail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
@@ -60,11 +62,13 @@ class UsersController extends Controller
             $user->is_active = 0;
             if($user->save()) {
                 $this->sendActivationEmail($post->email);
-                return view('pages.auth.confirm');
+                return redirect('/confirm');
+
             } else {
                 echo "Registraion failed. <a href='/'> back to home </a>";
             }
         }
+
         
     }
 
@@ -73,17 +77,30 @@ class UsersController extends Controller
     }
 
     public function sendActivationEmail($target) {
-        $data = [
-            'email' => $target,
-        ];
-        Mail::to($target)->send(new ArgonEmail($data));
+       
+        $kirim = Mail::to($target)->send(new ArgonEmail($target));
+    
+       
+        // var_dump($target); die();
     }
 
     public function activateUser($email){
         $data = User::where('email', $email)->first();
+        $plan = DB::select("SELECT id FROM plans ORDER BY price ASC LIMIT 1");
+        $trial = DB::select("SELECT trial_day FROM settings ORDER BY id DESC LIMIT 1");
+        $today = Date("d");
+        $trialEnd = $today + $trial[0]->trial_day;
+
         $data->is_active = 1;
-        $saved = $data->save();
-        if($saved) {
+        if($data->save()) {
+            $subs = new Subscription;
+            $subs->id_user = $data->id;
+            $subs->id_plan = $plan[0]->id;
+            $subs->is_trial = 1;
+            $subs->trial_end = Date("Y-m-".$trialEnd." H:m:s");
+            $subs->is_paid = 0;
+            $subs->status = 1;
+            $subs->save();
             return view('pages.auth.activationsuccess');
         }else {
             return "failed to activate user!";

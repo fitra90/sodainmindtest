@@ -25,8 +25,11 @@
     <button type="button" class="btn btn-success new-plan" data-toggle="modal" data-target="#exampleModal">
         Add New Plan
     </button>
+    <button type="button" class="btn btn-default trial-day"">
+        Set Trial Day
+    </button>
 
-    <div class="container-fluid">
+    <div class=" container-fluid">
         <div class="row">
             <div class="card">
                 <div class="card-header">
@@ -67,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 </div>
 
 <!-- Modal FORM-->
@@ -135,7 +138,50 @@
     </div>
 </div>
 
+<!-- Modal Trial Day-->
+<div class="modal fade" id="trialDay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Set Trial Day</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/set-trial">
+                    @csrf
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Trial Day</label>
+                        <input type="number" value="" name="trial_day" class="form-control trialDay"
+                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="hidden" class="trialId" name="id" value="" />
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+$('.trial-day').on("click", () => {
+    $.get('/admin/get-trial', (response) => {
+        $('#trialDay').modal('show')
+        if (response.length > 0) {
+            response.map(res => {
+                $('.trialId').val(res.id)
+                $('.trialDay').val(res.trial_day)
+            })
+
+
+        }
+    })
+})
+
 $('.new-plan').on("click", () => {
     $('#exampleModalLabel').html('Add New Plan')
 })

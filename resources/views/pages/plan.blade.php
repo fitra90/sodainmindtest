@@ -159,27 +159,29 @@ Coded by www.creative-tim.com
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
                                     <a href="javascript:;">
-                                        <img src="../assets/img/faces/team-4.jpg" class="rounded-circle">
+                                        <img src="https://www.insidehighered.com/sites/default/server_files/media/barber%20handshake.jpg" class="rounded-circle">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
+                                    <table>
+                                    <tr><td>
                                     <form action="/pay" method="POST">
-                                        <script
-                                            src="https://checkout.stripe.com/checkout.js" 
-                                            class="stripe-button" 
-                                            data-key="pk_test_C1Dps41NlB8MZT1fetvxQ3VU00MkEEzzJG"
-                                            data-amount="10000" 
-                                            data-name="test name" 
-                                            data-description="exampel" 
-                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png" 
-                                            data-local="auto" 
-                                            data-currency="usd">
-                                        </script>    
+                                        @csrf
+                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="pk_test_C1Dps41NlB8MZT1fetvxQ3VU00MkEEzzJG" data-amount="1000"
+                                            data-name="Argon Membership" data-description="Tier"
+                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                            data-local="auto" data-currency="usd">
+                                        </script>
                                     </form>
-                                    <a href="#" class="btn btn-sm btn-info mr-4">Buy Now</a>
-                                    <a href="#" class="btn btn-sm btn-default float-right">FREE TRIAL</a>
+                                    </td>
+                                    <td>
+                                    <a href="/auth/register" class="btn btn-sm btn-default float-right" style="padding-top: 7px; padding-bottom: 7px;">FREE TRIAL</a>
+                                    </td>
+                                    </tr>
+                                    </table>
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-1">
@@ -196,20 +198,13 @@ Coded by www.creative-tim.com
                             </div>
                         </div>
                         <div class="text-center mt-5">
-                            <h3>Jessica Jones<span class="font-weight-light">, 27</span></h3>
-                            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Bucharest, Romania</div>
-                            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Solution Manager -
-                                Creative Tim Officer</div>
-                            <div><i class="ni education_hat mr-2"></i>University of Computer Science</div>
+                            <h3 class="title"></h3>
+                            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i><span class="price"></span></div>
                         </div>
-                        <div class="mt-5 py-5 border-top text-center">
+                        <div class="mt-5 py-3 border-top text-center">
                             <div class="row justify-content-center">
                                 <div class="col-lg-9">
-                                    <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised,
-                                        Brooklyn-based Nick Murphy — writes, performs and records all of his own music,
-                                        giving it a warm, intimate feel with a solid groove structure. An artist of
-                                        considerable range.</p>
-                                    <a href="javascript:;">Show more</a>
+                                    <p class="description-data"></p>
                                 </div>
                             </div>
                         </div>
@@ -296,70 +291,17 @@ Coded by www.creative-tim.com
     <script src="../assets/demo/jquery.sharrre.js"></script>
     <script>
     $(document).ready(function() {
+        // console.log("ready!");
+        var id = {{Request::segment(2)}}
+        $.get('/admin/get-plan/' + id, (response) => {
+            //put values into form
+            $('.id').html(response.id)
+            $('.title').html(response.title)
+            $('.price').html("$" + response.price)
+            $('.description-data').html(response.description)
 
-
-
-        // Goolge Analytics Code Don't Delete
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-46172202-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
-                '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-
-        // Facebook Pixel Code Don't Delete
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window,
-            document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-
-        try {
-            fbq('init', '111649226022273');
-            fbq('track', "PageView");
-
-        } catch (err) {
-            console.log('Facebook Track Error:', err);
-        }
-
-
-        // 
-        // 
-
+        })
     });
-    </script>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
-    </noscript>
-    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-    <script>
-    window.TrackJS &&
-        TrackJS.install({
-            token: "ee6fab19c5a04ac1a32a645abde4613a",
-            application: "argon-design-system-pro"
-        });
     </script>
 </body>
 

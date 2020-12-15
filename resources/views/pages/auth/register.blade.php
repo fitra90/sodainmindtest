@@ -4,11 +4,11 @@
 <form class="login100-form validate-form flex-sb flex-w" method="POST" action="/auth/post-register">
     @csrf
     <span class="login100-form-title p-b-53">
-        <img src="/assets/img/brand/blue.png" width="300px" />
+        <img src="/assets/img/brand/blue.png" width="250px" />
         <br>
 
     </span>
-
+    <p style="color:green;">By registering you will got <b> 7 days of lowest tier account for free!</b></p>
     <div class="col-md-12 col-sm-12">
         @if($is_email_taken)
         <div class="alert alert-danger" role="alert">

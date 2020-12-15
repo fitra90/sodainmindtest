@@ -17,7 +17,6 @@ class ArgonEmail extends Mailable
      * @return void
      */
 
-    public $data;
 
     public function __construct($data)
     {
@@ -33,6 +32,6 @@ class ArgonEmail extends Mailable
     {
         return $this->from('no-reply@argon-networking.com')
                    ->view('pages.auth.activation-email')
-                   ->with($this->data);
+                   ->with(['email'=>$this->data]);
     }
 }

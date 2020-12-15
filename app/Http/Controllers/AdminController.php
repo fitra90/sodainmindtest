@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Plan;
+use App\Models\Setting;
 
 class AdminController extends Controller
 {
@@ -46,5 +47,31 @@ class AdminController extends Controller
 
         return redirect()->action([AdminController::class, 'settings']);
 
+    }
+
+    public function setTrialDay(Request $post) {
+        if($post->id == ''){
+            //insert
+            $trial = new Setting;
+        } else {
+            //update
+            $trial = Setting::find($post->id);
+        }
+           $trial->trial_day = $post->trial_day;
+
+        if($trial->save()) {
+            $post->session()->flash('success', "Success on saving data");
+
+        } else {
+            $post->session()->flash('error', "Error on saving data");
+        }
+
+        return redirect()->action([AdminController::class, 'settings']);
+
+    }
+
+    public function getTrialDay() {
+        $plans = DB::select("SELECT * FROM settings ORDER BY id DESC LIMIT 1");
+        return $plans;
     }
 }

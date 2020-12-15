@@ -185,47 +185,16 @@ Coded by www.creative-tim.com
                     </div>
                 </div>
                 <div class="row">
+                    @foreach($data as $plan)
                     <div class="col-md-4">
                         <div class="info">
-                            <div class="icon icon-lg icon-shape icon-shape-secondary shadow rounded-circle">
-                                <i class="ni ni-settings-gear-65"></i>
-                            </div>
-                            <h6 class="info-title text-uppercase text-primary">Silver Tier</h6>
-                            <p class="description opacity-8">We get insulted by others, lose trust for those others. We
-                                get back stabbed by friends. It becomes harder for us to give others a hand.</p>
-                            <a href="/plan/1" class="text-primary">More about Silver Tier
-                                <i class="ni ni-bold-right text-primary"></i>
+                            <h6 class="info-title text-uppercase text-primary">{{$plan->title}}</h6>
+                            <p class="description opacity-8">{{$plan->description}}</p>
+                            <a href="/plan/{{$plan->id}}" class="text-primary">More about {{$plan->title}}
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="info">
-                            <div class="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle">
-                                <i class="ni ni-atom"></i>
-                            </div>
-                            <h6 class="info-title text-uppercase text-warning">Gold Tier</h6>
-                            <p class="description opacity-8">Don't get your heart broken by people we love, even that we
-                                give them all we have. Then we lose family over time. As we live, our hearts turn
-                                colder.</p>
-                            <a href="/plan/1" class="text-warning">More about Gold Tier
-                                <i class="ni ni-bold-right text-warning"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info">
-                            <div class="icon icon-lg icon-shape icon-shape-info shadow rounded-circle">
-                                <i class="ni ni-world"></i>
-                            </div>
-                            <h6 class="info-title text-uppercase text-info">Platinum Tier</h6>
-                            <p class="description opacity-8">What else could rust the heart more over time? Blackgold.
-                                The time is now for it to be okay to be great. or being a bright color. For standing
-                                out.</p>
-                            <a href="/plan/2" class="text-info">More about Platinum Tier
-                                <i class="ni ni-bold-right text-info"></i>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -292,22 +261,7 @@ Coded by www.creative-tim.com
     <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
     <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../assets/js/argon-design-system.min.js?v=1.2.2" type="text/javascript"></script>
-    <script>
-    window.TrackJS &&
-        TrackJS.install({
-            token: "ee6fab19c5a04ac1a32a645abde4613a",
-            application: "argon-design-system-pro"
-        });
 
-    $('.join-now').on("click", () => {
-        window.scroll({
-            top: 1200,
-            left: 100,
-            behavior: 'smooth'
-        });
-    })
-    </script>
 </body>
 
 </html>
