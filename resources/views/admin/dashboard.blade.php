@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Dashboard')
+@section('title', 'Admin Dashboard')
 @section('content')
 
 <div class="content">
@@ -28,7 +28,7 @@
                                 <td class="text-center">{{$key +1}}</td>
                                 <td>{{$user->username}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->created_at}}</td>
+                                <td>{{$user->is_trial == 1 ? "Trial, " : ""}} {{$user->title}}</td>
                                 <td>{{$user->created_at}}</td>
                                 <td>{{$user->is_active == 0 ? "Inactive" : "Active"}}</td>
                                 <!-- <td class="td-actions text-right">

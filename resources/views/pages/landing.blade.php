@@ -33,6 +33,24 @@ Coded by www.creative-tim.com
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="../assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
+    <style>
+        .info-title {
+            padding: 10px;
+            background: mediumspringgreen;
+            text-align: center;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+        }
+        .price {
+            font-size: 20pt;
+            text-align: center;
+        }
+        .more-info {
+            background: moccasin;
+            padding: 5px;
+
+        }
+    </style>
 </head>
 
 <body class="landing-page">
@@ -75,7 +93,7 @@ Coded by www.creative-tim.com
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                     @if(session('user'))
                     <li class="nav-item d-none d-lg-block">
-                        <a href="/auth/register" class="btn btn-neutral btn-icon">
+                        <a href="/admin" class="btn btn-neutral btn-icon">
                             <span class="btn-inner--icon">
                                 <i class="ni ni-settings"></i>
                             </span>
@@ -189,8 +207,9 @@ Coded by www.creative-tim.com
                     <div class="col-md-4">
                         <div class="info">
                             <h6 class="info-title text-uppercase text-primary">{{$plan->title}}</h6>
+                            <p class="price opacity-8">${{$plan->price}}</p>
                             <p class="description opacity-8">{{$plan->description}}</p>
-                            <a href="/plan/{{$plan->id}}" class="text-primary">More about {{$plan->title}}
+                            <a href="/plan/{{$plan->id}}" class="more-info text-primary">More about {{$plan->title}} >>
                             </a>
                         </div>
                     </div>

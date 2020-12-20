@@ -126,6 +126,17 @@ Coded by www.creative-tim.com
                     </li>
                 </ul>
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+                @if(session('user'))
+                    <li class="nav-item d-none d-lg-block">
+                        <a href="/admin" class="btn btn-neutral btn-icon">
+                            <span class="btn-inner--icon">
+                                <i class="ni ni-settings"></i>
+                            </span>
+                            <span class="nav-link-inner--text">DASHBOARD</span>
+                        </a>
+                    </li>
+
+                    @else
                     <li class="nav-item d-none d-lg-block">
                         <a href="/auth/register" class="btn btn-neutral btn-icon">
                             <span class="btn-inner--icon">
@@ -134,6 +145,7 @@ Coded by www.creative-tim.com
                             <span class="nav-link-inner--text">Register NOW</span>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -159,15 +171,17 @@ Coded by www.creative-tim.com
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
                                     <a href="javascript:;">
-                                        <img src="https://www.insidehighered.com/sites/default/server_files/media/barber%20handshake.jpg" class="rounded-circle">
+                                        <img src="../assets/img/pages/archon2.png"
+                                            class="rounded-circle">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
                                     <table>
-                                    <tr><td>
-                                    <form action="/pay" method="POST">
+                                        <tr>
+                                            <td>
+                                                <!-- <form action="/pay" method="POST">
                                         @csrf
                                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                             data-key="pk_test_C1Dps41NlB8MZT1fetvxQ3VU00MkEEzzJG" data-amount="1000"
@@ -175,12 +189,18 @@ Coded by www.creative-tim.com
                                             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                             data-local="auto" data-currency="usd">
                                         </script>
-                                    </form>
-                                    </td>
-                                    <td>
-                                    <a href="/auth/register" class="btn btn-sm btn-default float-right" style="padding-top: 7px; padding-bottom: 7px;">FREE TRIAL</a>
-                                    </td>
-                                    </tr>
+                                    </form> -->
+                                                <button type="button" class="btn btn-primary openJoin">
+                                                    Join Now
+                                                </button>
+                                            </td>
+                                            @if(session('user'))
+                                            @else
+                                            <td>
+                                                <a href="/auth/register" class="btn btn btn-default float-right">FREE TRIAL</a>
+                                            </td>
+                                            @endif
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -199,7 +219,8 @@ Coded by www.creative-tim.com
                         </div>
                         <div class="text-center mt-5">
                             <h3 class="title"></h3>
-                            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i><span class="price"></span></div>
+                            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i><span
+                                    class="price"></span></div>
                         </div>
                         <div class="mt-5 py-3 border-top text-center">
                             <div class="row justify-content-center">
@@ -269,6 +290,30 @@ Coded by www.creative-tim.com
             </div>
         </footer>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--   Core JS Files   -->
     <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
@@ -281,10 +326,6 @@ Coded by www.creative-tim.com
     <script src="../assets/js/plugins/moment.min.js"></script>
     <script src="../assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
     <script src="../assets/js/plugins/bootstrap-datepicker.min.js"></script>
-    <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-    <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="../assets/js/argon-design-system.min.js?v=1.2.2" type="text/javascript"></script>
     <!-- Sharrre libray -->
@@ -292,7 +333,7 @@ Coded by www.creative-tim.com
     <script>
     $(document).ready(function() {
         // console.log("ready!");
-        var id = {{Request::segment(2)}}
+        var id = {{Request::segment(2) }}
         $.get('/admin/get-plan/' + id, (response) => {
             //put values into form
             $('.id').html(response.id)
@@ -302,6 +343,14 @@ Coded by www.creative-tim.com
 
         })
     });
+
+    $('.openJoin').on("click", ()=>{
+        @if(session('user'))
+        $('#exampleModal').modal()
+        @else
+        location.href="/auth/register"
+        @endif
+    })
     </script>
 </body>
 

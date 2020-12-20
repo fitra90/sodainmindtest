@@ -13,7 +13,7 @@ Route::get('/auth/login', [UsersController::class, 'showLoginForm']);
 Route::get('/auth/register', [UsersController::class, 'showRegisterForm']);
 Route::post('/auth/post-register', [UsersController::class, 'postRegister']);
 Route::get('/auth/email-activation/{userId}', [UsersController::class, 'sendActivationEmail']);
-Route::get('/auth/activate-this/{email}', [UsersController::class, 'activateUser']);
+Route::get('/activate-this/{email}', [UsersController::class, 'activateUser']);
 Route::view('/confirm','pages.auth.confirm');
 
 //LOGOUT
@@ -37,6 +37,9 @@ Route::get('/admin/get-trial', [AdminController::class, 'getTrialDay']);
 Route::get('/admin/get-plan/{id}', [PlansController::class, 'getPlanData']);
 Route::delete('/admin/delete-plan/{id}', [PlansController::class, 'deletePlanData']);
 
+//USER DASHBOARD
+Route::get('/user-dashboard', [UsersController::class, 'userDashboard']);
+Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin-settings');
 
 
 //ACTIONS

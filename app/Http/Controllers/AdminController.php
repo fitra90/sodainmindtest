@@ -11,7 +11,10 @@ class AdminController extends Controller
 {
     public function index() {
         if(session('role') == 1) {
-            $users = DB::table('users')->where('role', '=', '2')->get();
+            $users = DB::table('users')
+                ->leftJoin('subscriptions', 'users.id', '=', 'subscriptions.id_user')
+                ->leftJoin('plans', 'subscriptions.id_plan', '=', 'plans.id')
+                ->where('users.role', '=', '2')->get();
             // $subsriptions = DB::table()
             return view('admin.dashboard', ['users' => $users]);
         } else {

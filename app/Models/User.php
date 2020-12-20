@@ -9,4 +9,7 @@ class User extends Model
 {
     use HasFactory;
     // public $timestamps = false;
+    public function getSubsciption(){
+        return $this->hasOne('\App\Model\Subscription');
+    }
 }

@@ -42,7 +42,7 @@ The above copyright notice and this permission notice shall be included in all c
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item {{ Request::segment(2) == '' ? 'active' : '' }}">
-                        <a class="nav-link" href="/admin">
+                        <a class="nav-link" href="{{ Request::segment(2) == 'admin' ? '/admin' : '/user-dashboard' }}">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
@@ -53,13 +53,6 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Settings</p>
                         </a>
                     </li>
-                    <!-- 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./tables.html">
-                            <i class="material-icons">content_paste</i>
-                            <p>Table List</p>
-                        </a>
-                    </li> -->
                     <li class="nav-item active-pro ">
                         <a class="nav-link" href="/auth/logout">
                             <i class="material-icons">unarchive</i>

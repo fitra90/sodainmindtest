@@ -13,13 +13,20 @@ class UsersController extends Controller
 {
     public function getLogin(Request $post){
         $is_correct = User::where([['username', '=', $post->username],['password', '=', sha1($post->pass)]])->first();
-        
         if($is_correct && $is_correct->is_active > 0 && $is_correct->role == 2) {
-            session(['user' => $is_correct->email, 'role' => 1]);
+            $subs = User::find($is_correct->id)->getSubscription;
+            if($subs) {
+                $is_subscribed = $subs->status;
+                $is_paid = $subs->is_paid;
+            } else {
+                $is_subscribed = 0;
+                $is_paid = 0;
+            }
+            session(['user' => $is_correct->email, 'role' => 1, 'subscription'=> $is_subscribed, 'subs_paid'=>$is_paid]);
             return redirect()->action([HomeController::class, 'index']);
 
         } else if($is_correct && $is_correct->is_active > 0 && $is_correct->role ==1){
-            session(['user' => $is_correct->email, 'role' => 1]);
+            session(['user' => $is_correct->email, 'role' => 1,'subscription'=>'0']);
             return redirect()->action([AdminController::class, 'index']);
 
         } else if($is_correct && $is_correct->is_active == 0){
@@ -101,9 +108,13 @@ class UsersController extends Controller
             $subs->is_paid = 0;
             $subs->status = 1;
             $subs->save();
-            return view('pages.auth.activationsuccess');
+            return view('pages.auth.activationsuccess', array());
         }else {
             return "failed to activate user!";
         }
+    }
+
+    public function userDashboard() {
+        return view('admin.user-dashboard', array());
     }
 }
