@@ -197,7 +197,7 @@ Coded by www.creative-tim.com
                                             @if(session('user'))
                                             @else
                                             <td>
-                                                <a href="/auth/register" class="btn btn btn-default float-right">FREE TRIAL</a>
+                                                <a href="/auth/register?ref=trial&tier={{ Request::segment(2)}}" class="btn btn btn-default float-right">FREE TRIAL</a>
                                             </td>
                                             @endif
                                         </tr>

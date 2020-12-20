@@ -14,6 +14,8 @@ Route::get('/auth/register', [UsersController::class, 'showRegisterForm']);
 Route::post('/auth/post-register', [UsersController::class, 'postRegister']);
 Route::get('/auth/email-activation/{userId}', [UsersController::class, 'sendActivationEmail']);
 Route::get('/activate-this/{email}', [UsersController::class, 'activateUser']);
+Route::post('/auth/direct-join', [UsersController::class, 'directPayment']);
+Route::post('/auth/pay', [UsersController::class, 'getPayment']);
 Route::view('/confirm','pages.auth.confirm');
 
 //LOGOUT

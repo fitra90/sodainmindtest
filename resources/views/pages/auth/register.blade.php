@@ -1,14 +1,16 @@
 @extends('pages.auth.layout')
 @section('title', 'Register Page')
 @section('content')
-<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/auth/post-register">
+<form class="login100-form validate-form flex-sb flex-w" method="POST" action="{{$ref=='join'? '/auth/direct-join' : '/auth/post-register'}}">
     @csrf
     <span class="login100-form-title p-b-53">
         <img src="/assets/img/brand/blue.png" width="250px" />
         <br>
 
     </span>
+    @if($ref!='join')
     <p style="color:green;">By registering you will got <b> 7 days of lowest tier account for free!</b></p>
+    @endif
     <div class="col-md-12 col-sm-12">
         @if($is_email_taken)
         <div class="alert alert-danger" role="alert">
@@ -16,7 +18,7 @@
         </div>
         @endif
     </div>  
-    <div class="p-t-31 p-b-9">
+    <div class="p-t-13 p-b-9">
         <span class="txt1">
             Username
         </span>
@@ -25,7 +27,7 @@
         <input class="input100" type="text" name="username">
         <span class="focus-input100"></span>
     </div>
-    <div class="p-t-31 p-b-9">
+    <div class="p-t-13 p-b-9">
         <span class="txt1">
             Email
         </span>
@@ -44,10 +46,12 @@
         <input class="input100" type="password" name="pass">
         <span class="focus-input100"></span>
     </div>
-
+    @if($ref=='join')
+    <input type="hidden" name="plan" value="{{ $tier}}" />
+    @endif
     <div class="container-login100-form-btn m-t-17">
         <button class="login100-form-btn" type="submit">
-            Register
+            {{$ref=='trial' ? 'Start Your Free Trial' : 'Register'}}
         </button>
     </div>
 
