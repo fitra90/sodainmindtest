@@ -37,7 +37,7 @@ The above copyright notice and this permission notice shall be included in all c
     <div class="wrapper ">
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
             <div class="logo"><a href="#" class="simple-text logo-normal">
-                    Admin
+                   {{session('role') > 1 ? "User" : "Admin"}} Dashboard
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
@@ -48,7 +48,7 @@ The above copyright notice and this permission notice shall be included in all c
                         </a>
                     </li>
                     <li class="nav-item {{ Request::segment(2) == 'settings' ? 'active' : '' }}">
-                        <a class="nav-link" href="/admin/settings">
+                        <a class="nav-link" href="{{ Request::segment(2) == 'admin' ? '/admin/settings' : '/user-dashboard/settings' }}">
                             <i class="material-icons">settings</i>
                             <p>Settings</p>
                         </a>

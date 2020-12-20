@@ -39,7 +39,7 @@ Route::delete('/admin/delete-plan/{id}', [PlansController::class, 'deletePlanDat
 
 //USER DASHBOARD
 Route::get('/user-dashboard', [UsersController::class, 'userDashboard']);
-Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin-settings');
+Route::get('/user-dashboard/settings', [UsersController::class, 'settings'])->name('user-settings');
 
 
 //ACTIONS

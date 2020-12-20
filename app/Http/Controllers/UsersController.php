@@ -22,7 +22,7 @@ class UsersController extends Controller
                 $is_subscribed = 0;
                 $is_paid = 0;
             }
-            session(['user' => $is_correct->email, 'role' => 1, 'subscription'=> $is_subscribed, 'subs_paid'=>$is_paid]);
+            session(['user' => $is_correct->email, 'role' => '2', 'subscription'=> $is_subscribed, 'subs_paid'=>$is_paid]);
             return redirect()->action([HomeController::class, 'index']);
 
         } else if($is_correct && $is_correct->is_active > 0 && $is_correct->role ==1){
@@ -37,9 +37,16 @@ class UsersController extends Controller
         }
     }
 
-    public function showRegisterForm() {
+    public function showRegisterForm(Request $get) {
+        // var_dump(session('role')); die();
+        $ref = $get->ref;
+        $tier = $get->tier;
         if(session()->has('user')) {
-            return redirect('/');
+            if(session('role') > 1) {
+                return redirect('/user-dashboard?ref='.$ref.'&tier='.$tier);
+            } else {
+                return redirect('/admin');
+            }
          } else {
             return view('pages.auth.register', array('is_email_taken'=> false));
          }
@@ -116,5 +123,9 @@ class UsersController extends Controller
 
     public function userDashboard() {
         return view('admin.user-dashboard', array());
+    }
+
+    public function settings() {
+        return view('/admin.user-setting', array());
     }
 }

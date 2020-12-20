@@ -348,7 +348,7 @@ Coded by www.creative-tim.com
         @if(session('user'))
         $('#exampleModal').modal()
         @else
-        location.href="/auth/register"
+        location.href="/auth/register?ref=join&tier={{ Request::segment(2)}}"
         @endif
     })
     </script>
