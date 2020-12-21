@@ -40,9 +40,11 @@
                                         Upgrade Plan
                                     </button>
                                     @endif
+                                    @if($data[0]->is_trial == 0)
                                     <button type="button" class="btn btn-danger" onclick="cancel({{$data[0]->id}})">
                                         Cancel Subscription
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>
@@ -75,6 +77,7 @@
                         data-currency="usd">
                     </script>
                     <input type="hidden" name="id_user" value="{{$data[0]->id_user}}" />
+                    <input type="hidden" name="email" value="{{$data[0]->email}}" />
                     <input type="hidden" name="description" value="Upgrade Subscripton for {{$data[0]->title}}" />
                     <input type="hidden" name="amount" value="{{$data[0]->price}}" />
                 </form>
@@ -84,9 +87,55 @@
     </div>
 </div>
 
+<!-- Modal cancel-->
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cancel Membership</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to cancel this membership?</p>
+                <input type="hidden" id="id-delete" value="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="yesDelete('{{$data[0]->id_user}}')">YES</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 function cancel(idplan) {
-    $("#exampleModal").modal()
+    $("#cancelModal").modal()
+}
+
+function yesDelete(id) {
+    $.ajax({
+        url: '/cancel-plan/',
+        type: 'PUT',
+        data: {
+            'id_user': id,
+            'email': '{{$data[0]->email}}',
+            '_token': '{{ csrf_token() }}',
+        },
+        success: function(result) {
+            // Do something with the 
+            // if(result == 1) {
+            //     alert("Successfully Remove Plan");
+            // } else {
+            //     alert("Failed to remove plan!")
+            // }
+            location.reload();
+
+        }
+    });
+
 }
 
 function upgrade(idplan) {

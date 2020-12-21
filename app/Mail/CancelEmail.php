@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ArgonEmail extends Mailable
+class CancelEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class ArgonEmail extends Mailable
     public function build()
     {
         return $this->from('no-reply@argon-networking.com')
-                   ->view('pages.email.activation-email')
+                   ->view('pages.email.cancel-email')
                    ->with(['email'=>$this->data]);
     }
 }

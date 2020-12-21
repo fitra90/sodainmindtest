@@ -47,3 +47,4 @@ Route::get('/user-dashboard/settings', [UsersController::class, 'settings'])->na
 //ACTIONS
 Route::post('/pay',[SubscriptionsController::class, 'getPayment']);
 Route::post('/pay-upgrade',[SubscriptionsController::class, 'upgradePlan']);
+Route::put('/cancel-plan',[SubscriptionsController::class, 'cancelPlan']);

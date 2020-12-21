@@ -5,6 +5,9 @@ use App\Models\User;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Mail\ArgonEmail;
+use App\Mail\UpgradeEmail;
+use App\Mail\CancelEmail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class SubscriptionsController extends Controller
@@ -22,6 +25,18 @@ class SubscriptionsController extends Controller
     public function sendActivationEmail($target) {
        
         $kirim = Mail::to($target)->send(new ArgonEmail($target));
+    
+    }
+
+    public function sendUpgradeEmail($target) {
+       
+        $kirim = Mail::to($target)->send(new UpgradeEmail($target));
+    
+    }
+
+    public function sendCancelEmail($target) {
+       
+        $kirim = Mail::to($target)->send(new CancelEmail($target));
     
     }
 
@@ -77,7 +92,7 @@ class SubscriptionsController extends Controller
             'source' => $post->stripeToken
         ]);
         if($charge){
-            // $this->sendActivationEmail($post->email);
+            $this->sendUpgradeEmail($post->email);
             $upgrade = Subscription::where('id_user', "=", $post->id_user)->update(array(
                 'is_paid' => 1,
                 'trial_end' => null,
@@ -86,5 +101,21 @@ class SubscriptionsController extends Controller
             
             return redirect('/user-dashboard');
         }
+    }
+
+    public function cancelPlan(Request $post) {
+        // var_dump($post->id_user); die();
+        $trial = DB::select("SELECT trial_day FROM settings ORDER BY id DESC LIMIT 1");
+        $today = Date("d");
+        $trialEnd = $today + $trial[0]->trial_day;
+        $cancel = Subscription::where('id_user', "=", $post->id_user)->update(array(
+            'is_paid' => 0,
+            'trial_end' => Date("Y-m-".$trialEnd." H:m:s"),
+            'is_trial' => 1
+        ));
+        $this->sendCancelEmail($post->email);
+
+        // if($cancel > 0)
+        // var_dump($cancel); die();
     }
 }
