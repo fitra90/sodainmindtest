@@ -75,6 +75,21 @@ class UsersController extends Controller
             $user->is_login = 0;
             $user->is_active = 0;
             if($user->save()) {
+                $data = User::where('email', '=', $post->email)->first();
+                $data->is_active = 1;
+                $plan = DB::select("SELECT id FROM plans ORDER BY price ASC LIMIT 1");
+                $trial = DB::select("SELECT trial_day FROM settings ORDER BY id DESC LIMIT 1");
+                $today = Date("d");
+                $trialEnd = $today + $trial[0]->trial_day;
+
+                $subs = new Subscription;
+                $subs->id_user = $data->id;
+                $subs->id_plan = $plan[0]->id;
+                $subs->is_trial = 1;
+                $subs->trial_end = Date("Y-m-".$trialEnd." H:m:s");
+                $subs->is_paid = 0;
+                $subs->status = 1;
+                $subs->save();
                 $this->sendActivationEmail($post->email);
 
             } else {
@@ -125,55 +140,70 @@ class UsersController extends Controller
         $is_email_taken = User::where('email', '=', $post->email)->first();
         $plan = Plan::where('id', '=', $post->plan)->first();
         if($is_email_taken) {
-            return view('pages.auth.register', array('is_email_taken' => true));
+            return view('pages.auth.register', array('is_email_taken' => true, 'ref'=>$post->ref, 'tier'=>$post->plan));
         } else {
             return view('pages.auth.payment-front', array('is_payment_fail'=>false, 'data'=>$post, 'plan'=>$plan));
         }
     }
 
     public function userDashboard() {
-        return view('admin.user-dashboard', array());
+        $users = DB::table('users')
+                ->leftJoin('subscriptions', 'users.id', '=', 'subscriptions.id_user')
+                ->leftJoin('plans', 'subscriptions.id_plan', '=', 'plans.id')
+                ->where('users.email', '=', session('user'))->get();
+        return view('admin.user-dashboard', array('data'=>$users));
     }
 
     public function settings() {
         return view('/admin.user-setting', array());
     }
 
-    public function getPayment(Request $post) {
-        // var_dump($post->username); die();
-        \Stripe\Stripe::setApiKey("sk_test_51GJrY3KNF4OBPGr3RVnkp5n20VPvw5AenH9vDZjlUCD6FxkNVFf5lVYvA89lTU7AErF7mTdbBQLHDEEcwJHUti4n00WPO3ygym");
-        $charge = \Stripe\Charge::create([
-            'amount' => $post->amount,
-            'currency' => 'usd',
-            'description' => 'Payment for '.$post->tier,
-            'source' => 'pk_test_C1Dps41NlB8MZT1fetvxQ3VU00MkEEzzJG'
-        ]);
-        if($charge){
-            $user = new User;
-            $user->username = $post->username;
-            $user->email = $post->email;
-            $user->password = sha1($post->pass);
-            $user->role = 2;
-            $user->is_login = 0;
-            $user->is_active = 0;
-            if($user->save()) {
-                //add subscription
-                $reg_user = User::where('email', $post-email)->get('id');
-                $subs = new Subscription;
-                $subs->id_user = $reg_user->id;
-                $subs->id_plan = $post->plan;
-                $subs->is_trial = 0;
-                $subs->trial_end = null;
-                $subs->is_paid = 1;
-                $subs->status = 1;
-                $subs->save();
-                $this->sendActivationEmail($post->email);
+    // public function getPayment(Request $post) {
+    //     // var_dump($post->username); die();
+    //     \Stripe\Stripe::setApiKey("sk_test_51GJrY3KNF4OBPGr3RVnkp5n20VPvw5AenH9vDZjlUCD6FxkNVFf5lVYvA89lTU7AErF7mTdbBQLHDEEcwJHUti4n00WPO3ygym");
+    //     $charge = \Stripe\Charge::create([
+    //         'payment_method_types' => ['card'],
+    //         'line_items' => [[
+    //             'price_data' => [
+    //             'currency' => 'usd',
+    //             'unit_amount' => 2000,
+    //             'product_data' => [
+    //                 'name' => 'Stubborn Attachments',
+    //                 'images' => ["https://static.wikia.nocookie.net/dota2_gamepedia/images/8/87/SeasonalRank4-2.png"],
+    //             ],
+    //             ],
+    //             'quantity' => 1,
+    //         ]],
+    //         'mode' => 'payment',
+    //         'success_url' => '/confirm',
+    //         'cancel_url' => '/',
+    //     ]);
+    //     if($charge){
+    //         $user = new User;
+    //         $user->username = $post->username;
+    //         $user->email = $post->email;
+    //         $user->password = sha1($post->pass);
+    //         $user->role = 2;
+    //         $user->is_login = 0;
+    //         $user->is_active = 0;
+    //         if($user->save()) {
+    //             //add subscription
+    //             $reg_user = User::where('email', $post-email)->get('id');
+    //             $subs = new Subscription;
+    //             $subs->id_user = $reg_user->id;
+    //             $subs->id_plan = $post->plan;
+    //             $subs->is_trial = 0;
+    //             $subs->trial_end = null;
+    //             $subs->is_paid = 1;
+    //             $subs->status = 1;
+    //             $subs->save();
+    //             $this->sendActivationEmail($post->email);
 
-            } else {
-                echo "Registraion failed. <a href='/'> back to home </a>";
-            }
-        } else {
+    //         } else {
+    //             echo "Registraion failed. <a href='/'> back to home </a>";
+    //         }
+    //     } else {
 
-        }
-    }
+    //     }
+    // }
 }

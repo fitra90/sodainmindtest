@@ -48,6 +48,7 @@
     </div>
     @if($ref=='join')
     <input type="hidden" name="plan" value="{{ $tier}}" />
+    <input type="hidden" name="ref" value="join" />
     @endif
     <div class="container-login100-form-btn m-t-17">
         <button class="login100-form-btn" type="submit">

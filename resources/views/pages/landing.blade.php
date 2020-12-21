@@ -93,7 +93,7 @@ Coded by www.creative-tim.com
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                     @if(session('user'))
                     <li class="nav-item d-none d-lg-block">
-                        <a href="/admin" class="btn btn-neutral btn-icon">
+                        <a href="{{session('role')==1 ? '/admin' : '/user-dashboard'}}" class="btn btn-neutral btn-icon">
                             <span class="btn-inner--icon">
                                 <i class="ni ni-settings"></i>
                             </span>
